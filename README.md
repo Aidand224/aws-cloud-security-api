@@ -71,15 +71,6 @@ Analyzes stored security events and returns:
 - Most common event type
 - Most common source IP
 
-## Troubleshooting and What I Learned
-
-One of the main problems I ran into was getting the Lambda Function URL to work with public requests. The Function URL was configured with an authentication type of `NONE`, but requests were still returning an `AccessDeniedException`.
-
-After checking the Lambda configuration and testing the API with PowerShell, I found that the function's resource-based policy was empty. I added the required permissions for `lambda:InvokeFunctionUrl` and `lambda:InvokeFunction`, then tested the endpoint again to confirm that requests could reach the Lambda function.
-
-Working through this helped me better understand the difference between IAM permissions used by a Lambda function to access another AWS service and resource-based permissions that control who can invoke the function.
-
-I also used CloudWatch logs to troubleshoot a Python indentation error after updating the event classification logic. Instead of changing multiple parts of the project, I used the traceback to locate the specific line causing the Lambda invocation to fail.
 
 ## Project Structure
 
