@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+
+# Environment variables and secrets
+.env
+.env.*
+*.pem
+*.key
+credentials
+credentials.*
+
+# AWS local configuration
+.aws/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
