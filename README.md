@@ -20,6 +20,7 @@ Client → Lambda Function URL → AWS Lambda → Amazon DynamoDB
 - AWS Lambda
 - Amazon DynamoDB
 - AWS IAM
+- Amazon CloudWatch
 - Lambda Function URLs
 - Boto3
 - Flask (local development)
@@ -55,6 +56,20 @@ Example request:
   "event_type": "failed_login",
   "source_ip": "192.168.1.50"
 }
+```
+
+### `GET /events`
+
+Retrieves security events currently stored in the DynamoDB table.
+
+### `GET /stats`
+
+Analyzes stored security events and returns:
+
+- Total number of events
+- Event counts by severity
+- Most common event type
+- Most common source IP
 
 ## Troubleshooting and What I Learned
 
@@ -70,17 +85,23 @@ I also used CloudWatch logs to troubleshoot a Python indentation error after upd
 
 ```text
 aws-cloud-project/
+├── screenshots/
+│   ├── architecture.png
+│   ├── dynamodb-events.png
+│   ├── events-endpoint.png
+│   └── stats-endpoint.png
+├── .gitignore
 ├── app.py
 ├── lambda_function.py
-├── requirements.txt
-├── .gitignore
-└── README.md
+├── README.md
+└── requirements.txt
 ```
 
 - `app.py` - Original Flask version used during local development
 - `lambda_function.py` - Serverless version deployed to AWS Lambda
 - `requirements.txt` - Python dependencies
 - `.gitignore` - Prevents unnecessary or sensitive local files from being committed
+- `screenshots/` - Architecture diagram and examples of the working API
 - `README.md` - Project documentation
 
 ## Architecture
@@ -88,8 +109,6 @@ aws-cloud-project/
 The API uses a serverless AWS architecture. HTTP requests are sent through a public Lambda Function URL to a Python Lambda function. The function processes security events, automatically assigns severity levels, stores and retrieves events from DynamoDB, and sends execution logs to CloudWatch.
 
 ![AWS Cloud Security API Architecture](screenshots/architecture.png)
-
-## Screenshots
 
 ## Screenshots
 
